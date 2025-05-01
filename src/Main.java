@@ -1,15 +1,57 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.ArrayList;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main {
+    static int landSize = 10;
+    static Scanner scanner = new Scanner(System.in);
+    static Human human = new Human(landSize);
+    static ArrayList<Goblin> goblins = new ArrayList<>();
+    static Land land = new Land(landSize);
+
+    static void update(){
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
         }
+        land.print();
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++) {
+            goblins.add(new Goblin(landSize));
+        }
+        land.setCell(human.getPosition()[0], human.getPosition()[1], human.getIcon(), Integer.toString(human.getLvl()));
+        land.print();
+        while(true){
+            String input = scanner.nextLine().toUpperCase();
+            switch (input) {
+                case "W":
+                    human.upForward();
+                    land.clearCell(human.getPosition()[0]+1, human.getPosition()[1]);
+                    land.setCell(human.getPosition()[0], human.getPosition()[1], human.getIcon(), Integer.toString(human.getLvl()));
+                    update();
+                    break;
+                case "A":
+                    human.leftForward();
+                    land.clearCell(human.getPosition()[0], human.getPosition()[1]+1);
+                    land.setCell(human.getPosition()[0], human.getPosition()[1], human.getIcon(), Integer.toString(human.getLvl()));
+                    update();
+                    break;
+                case "S":
+                    human.downForward();
+                    land.clearCell(human.getPosition()[0]-1, human.getPosition()[1]);
+                    land.setCell(human.getPosition()[0], human.getPosition()[1], human.getIcon(), Integer.toString(human.getLvl()));
+                    update();
+                    break;
+                case "D":
+                    human.rightForward();
+                    land.clearCell(human.getPosition()[0], human.getPosition()[1]-1);
+                    land.setCell(human.getPosition()[0], human.getPosition()[1], human.getIcon(), Integer.toString(human.getLvl()));
+                    update();
+                    break;
+            }
+        }
+
+
     }
 }
