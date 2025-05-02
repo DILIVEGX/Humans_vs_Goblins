@@ -1,18 +1,21 @@
-import java.util.Random;
-
 public class Goblin extends Character {
     Goblin(int landSize) {
         super.icon = "(◣_◢)";
         super.landSize = landSize;
+        super.lvl = 1;
+    }
+
+    public void setPosition(int[] position) {
+        super.position = position;
     }
 
     public void move() {
         int[][] directions = {
-                {-1, 0}, // up
-                {1, 0},  // down
-                {0, -1}, // left
-                {0, 1},   // right
-                {0, 0}  // no move
+                {-1, 0},
+                {1, 0},
+                {0, -1},
+                {0, 1},
+                {0, 0}
         };
         while (true) {
             int[] dir = directions[(int)(Math.random() * 5)];
@@ -25,5 +28,9 @@ public class Goblin extends Character {
                 break;
             }
         }
+    }
+
+    public void setLevel(int level) {
+        super.lvl = level;
     }
 }

@@ -1,6 +1,6 @@
 public class Character {
-    private final int lvl = 1;
-    protected final int[] position = {0, 0};
+    protected int lvl = 1;
+    protected int[] position = {0, 0};
     protected String icon;
     protected int landSize;
 
@@ -41,6 +41,11 @@ public class Character {
 
     public String getIcon() {
         return icon;
+    }
+
+    void resetPosition() {
+        position[0] = 0;
+        position[1] = 0;
     }
 
 }
